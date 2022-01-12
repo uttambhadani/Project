@@ -1,0 +1,75 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block title %}
+<title>View Product</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <br><br><br>
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Your Products</h1>
+    
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">All Products Details</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Product Title</th>
+                            <th>Product Description</th>
+                            <th>Product Price</th>
+                            <th>Quantity</th>
+                            <th>Category</th>
+                            <th>Picture</th>
+                            <th colspan="2">Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Product Title</th>
+                            <th>Product Description</th>
+                            <th>Product Price</th>
+                            <th>Quantity</th>
+                            <th>Category</th>
+                            <th>Picture</th>
+                            <th colspan="2">Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for pro in products %}
+                       <tr>
+                           <td>{{pro.name}}</td>
+                           <td>{{pro.des}}</td>
+                           <td>{{pro.price}}</td>
+                           <td>{{pro.quantity}}</td>
+                           <td>{{pro.category}}</td>
+                           {% if pro.pic %}
+                           <td>
+                               <img src="{{pro.pic.url}}" alt="" width="100px" height="100px">
+                           </td>
+                           {% else %}
+                           <td>No image</td>
+                           {% endif %}
+                           <td><a href="{% url 'edit-product' pro.id %}" rel="noopener noreferrer"><button class="btn btn-primary"><i class="fa fa-edit"></i></button></a></td>
+                           <td><a href="{% url 'delete-product' pro.id %}"><button class="btn btn-danger"><i class="fa fa-trash"></i></button></a>  </td>
+                       </tr>
+                       {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+</div>
+
+{% endblock %}

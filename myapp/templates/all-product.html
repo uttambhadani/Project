@@ -1,0 +1,44 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="featured-items">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-heading">
+            <div class="line-dec"></div>
+            <h1>Featured Items</h1>
+          </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                {% for product in products %}
+                <div class="col-sm-6">
+                    <a href="{% url 'view-product' product.id %}">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">{{product.name}}</h5>
+                      <img src="{{product.pic.url}}" alt="" width="60px" height="40px">
+                      <p class="card-text">{{product.des}}</p>
+                      <p class="card-text"> <i class="fa fa-inr"></i> {{product.price}}</p>
+                      {% if product.quantity < 5 %}
+                      <p style="color: red;font-size: larger;">Hurry Only Few stock is left</p>
+                      {% else %}
+                      <p style="color: rgba(255, 0, 0, 0);font-size: larger;"> sd</p>
+                      {% endif %}
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </a>
+                </div>
+                
+                {% endfor %}
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

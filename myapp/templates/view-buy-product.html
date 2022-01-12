@@ -1,0 +1,65 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+    <!-- Page Content -->
+    <!-- Single Starts Here -->
+    <div class="single-product">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <div class="line-dec"></div>
+              <h1>View Product</h1>
+            </div>
+            {{msg}}
+          </div>
+          <div class="col-md-6">
+            <div class="product-slider">
+              <div id="slider" class="flexslider">
+                <ul class="slides">
+                  <li>
+                    {% if buy.product.pic %}
+                    <img src="{{buy.product.pic.url}}" />
+                    {% endif %}
+                  </li>
+                  
+                  <!-- items mirrored twice, total of 12 -->
+                </ul>
+              </div>
+              
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-content">
+              <h4>{{buy.product.name}}</h4>
+              <h6><i class="fa fa-inr"></i> {{buy.product.price}}</h6>
+              <h6><i class="fa fa-inr"></i>Paid amount {{buy.pay_amount}}</h6>
+              <h6><i class=""></i>Product quantity : {{buy.quantity}}</h6>
+
+              <p>{{buy.address}}</p>
+              
+              
+              <div class="down-content">
+                <div class="categories">
+                  <h6>Product buy By: <span>{{buy.uid.email}}</h6>
+                </div>
+                <div class="share">
+                  <h6>Share: <span><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i class="fa fa-twitter"></i></a></span></h6>
+                </div>
+                Buy date : {{buy.order_date}} <br>
+                Delievery date : {{buy.expected_del}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Single Page Ends Here -->
+
+
+    <!-- Subscribe Form Starts Here -->
+    
+    
+    <!-- Subscribe Form Ends Here -->
+
+{% endblock %}

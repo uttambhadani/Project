@@ -1,0 +1,31 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<br><br><br><br>
+
+<p>Hello {{cart.uid.fname}}</p>
+
+{% if cart.product %}
+
+{% for i in cart.product.all %}
+<a href="{% url 'view-product' i.id %}">
+<div class="card" style="width: 18rem;">
+  <img src="{{i.pic.url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{i.name}}</h5>
+    <p class="card-text">{{i.des}}</p>
+
+    <a href="#" class="btn btn-primary">{{i.price}}</a>
+    <a href="{% url 'delete-cart' i.id %}"><button class="btn btn-primary">Remove from Cart</button></a>
+  </div>
+</div>
+</a>
+{% endfor %}
+{% else %}
+
+<h1>Cart is Empty</h1>
+
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<br><br><br><br>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        <form action="{% url 'seller-buy-product' %}" method="POST">
+            {% csrf_token %}
+            <select name="search" id="">
+                <option value="pending" selected>Pending</option>
+                <option value="complete">Completed</option>
+            </select>
+        <input type="submit" name="" value="Search" id="">
+        </form>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Buyer's Name</th>
+                        <th>Product</th>
+                        <th>quantity</th>
+                        <th>Price paid</th>
+                        <th>Order Date</th>
+                        <th>Delievery date</th>
+                        <th>View Buy details</th>
+                        <th>Delievery status</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Buyer's Name</th>
+                        <th>Product</th>
+                        <th>quantity</th>
+                        <th>Price paid</th>
+                        <th>Order Date</th>
+                        <th>Delievery date</th>
+                        <th>View Buy details</th>
+                        <th>Delievery status</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for i in buys %}
+                    {% if i.product.uid.email == request.session.email and i.status == select %}
+                    <tr>
+                        <td>{{i.uid.fname}} {{i.uid.lname}}</td>
+                        <td>{{i.product.name}}</td>
+                        <td>{{i.quantity}}</td>
+                        <td>{{i.pay_amount}}</td>
+                        <td>{{i.order_date}}</td>
+                        <td>{{i.expected_del}}</td>
+                        <td><a href="{% url 'view-buy-product' i.id %}"> <i class="fa fa-eye"></i></a></td>
+                        {% if i.status == False %}
+                        <td><a href="{% url 'complete-del' i.id %}"><button class="btn btn-primary">Delieverd</button></a></td>
+                        {% else %}
+                        <td>Dilivery complete</td>
+                        {% endif %}
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
